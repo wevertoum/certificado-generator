@@ -12,30 +12,28 @@ export default function Home() {
   const _generateCertificados = useCallback(() => {
     if (currentData.length !== 0) {
       currentData.map((item: any, i) => {
-        setTimeout(() => {
-          let doc = new jsPDF({
-            orientation: "landscape",
-            unit: "px",
-            format: [600, 400],
-          });
+        let doc = new jsPDF({
+          orientation: "landscape",
+          unit: "px",
+          format: [600, 400],
+        });
 
-          let img = document.createElement("img");
-          img.src = "/background.png";
-          console.log(img);
+        let img = document.createElement("img");
+        img.src = "/background.png";
+        console.log(img);
 
-          doc.addImage({
-            imageData: img,
-            x: 0,
-            y: 0,
-            width: 600,
-            height: 400,
-          });
-          doc.setFont("helvetica");
-          doc.setFontSize(20);
-          // @ts-ignore
-          doc.text(20, 20, `certifico que: ${item[keyValue as string]}`);
-          doc.save(`${i}º-certificado.pdf`);
-        }, 300);
+        doc.addImage({
+          imageData: img,
+          x: 0,
+          y: 0,
+          width: 600,
+          height: 400,
+        });
+        doc.setFont("helvetica");
+        doc.setFontSize(20);
+        // @ts-ignore
+        doc.text(20, 20, `certifico que: ${item[keyValue as string]}`);
+        doc.save(`certificado-${item[keyValue as string]}.pdf`);
       });
     }
   }, [currentData, keyValue]);
@@ -60,7 +58,6 @@ export default function Home() {
 
         <div className={styles.content}>
           <div className={styles.containerItem}>
-            {/* make a input that receive a csv file and convert to object */}
             <input
               type="file"
               accept="text/csv"
@@ -73,7 +70,6 @@ export default function Home() {
                   lines.forEach((line: string, index: string | number) => {
                     lines[index] = line.replace(/\r/g, "");
                   });
-                  // get the first line as headers and acumulate the rest
                   const headers = lines[0].split(",");
                   const rows = lines.slice(1);
                   const dataObject = rows.reduce((acc: any, row: any) => {
