@@ -1,2 +1,4 @@
 # certificado-generator
-um sisteminha q to fazendo pra gerar certificados pdf para o meu projeto de pesquisa
+A project that converts CSV files into PDF participation certificates 
+
+still in progress
